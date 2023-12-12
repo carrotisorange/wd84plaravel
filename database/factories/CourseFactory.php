@@ -20,7 +20,7 @@ class CourseFactory extends Factory
         return [
             'course' => $this->faker->word,
             'schedule' => rand(8,12).'-'.rand(1,7).'/'.Arr::random(['MWF','TTHS']),
-            'is_active_flag' => rand(1,0),
+            'is_active_flag' => rand(0,1),
         ];
     }
 }
