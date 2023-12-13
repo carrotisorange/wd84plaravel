@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+
+    protected $table = 'payments';
+
+    public function student(){
+        return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function loan(){
+        return $this->belongsTo(Loan::class, 'loan_id');
+    }
 }

@@ -14,4 +14,12 @@ class Student extends Model
     public function studentCourses(){
         return $this->hasMany(StudentCourse::class);
     }
+
+    public function loans(){
+        return $this->hasMany(Loan::class);
+    }
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
 }

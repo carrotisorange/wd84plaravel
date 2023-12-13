@@ -11,7 +11,17 @@ class Course extends Model
 
     protected $table='courses';
 
+    protected $fillable = [
+        'course',
+        'schedule',
+        'is_active_flag',
+    ];
+
     public function studentCourses(){
        return $this->hasMany(StudentCourse::class);
+    }
+
+    public function loans(){
+        return $this->hasMany(Loan::class);
     }
 }
