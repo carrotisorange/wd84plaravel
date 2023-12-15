@@ -89,5 +89,11 @@ Route::post('/payment/', [PaymentController::class, 'store']);
 Route::put('/payment/{id}/update', [PaymentController::class, 'update']);
 Route::delete('/payment/{id}', [PaymentController::class, 'destroy']);
 
+Route::get('/user', function(){
+    $user = App\Models\User::find(auth()->user()->id);
+
+    return $user->role->role;
+});
+
 
 require __DIR__.'/auth.php';
