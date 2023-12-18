@@ -41,7 +41,7 @@ Route::get('/student/{id}/edit', [StudentController::class, 'edit']);
 Route::get('/student/', [StudentController::class, 'create']);
 
 Route::post('/student/', [StudentController::class, 'store']);
-Route::put('/student/{id}/update', [StudentController::class, 'update']);
+Route::put('/student/{id}/', [StudentController::class, 'update']);
 Route::delete('/student/{id}', [StudentController::class, 'destroy']);
 
 //route for the studentcourse
