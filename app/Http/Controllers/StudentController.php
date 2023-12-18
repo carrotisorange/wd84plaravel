@@ -67,4 +67,16 @@ class StudentController extends Controller
             return 'Restricted page';
         }
     }
+
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|min:2|max:25',
+            'age' => 'required|integer|min:1|max:100',
+            'address' => 'required|min:10|max:50'
+        ]);
+
+        $student = Student::create($validatedData);
+
+        return redirect('/student/'.$student->id)->with('success', 'Success!');
+    }
 }

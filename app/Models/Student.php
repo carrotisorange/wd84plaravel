@@ -11,6 +11,12 @@ class Student extends Model
 
     protected $table = 'students';
 
+    protected $fillable = [
+        'name',
+        'age',
+        'address'
+    ];
+
     public function studentCourses(){
         return $this->hasMany(StudentCourse::class);
     }

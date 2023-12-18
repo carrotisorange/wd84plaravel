@@ -10,7 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <p class="text-right">
-                        <a href="/student" class="text-black btn btn-primary">Add a student</a>
+                        @if(auth()->user()->role->role == 'admin')
+                        <a href="/student" class="text-black btn btn-primary">Create</a>
+                        @endif
                     </p>
                     <table class="table">
                         <thead>
