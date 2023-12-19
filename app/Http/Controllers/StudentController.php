@@ -15,10 +15,7 @@ class StudentController extends Controller
 
         //check if the current user role is admin, if not, return restricted page.
         if($currentUserRole == 'admin'){
-            $students = Student::paginate(10);
-            // DB::table('students')->paginate(10);
-
-            return view('students.index',compact('students'));
+            return view('students.index');
         }
         else{
             return 'Restricted page';
@@ -32,6 +29,7 @@ class StudentController extends Controller
 
         //check if the current user role is admin, if not, return restricted page.
         if($currentUserRole == 'admin'){
+
             $student = Student::find($id);
 
             $studentsCourses = $student->studentCourses()->get();
