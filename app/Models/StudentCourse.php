@@ -11,6 +11,16 @@ class StudentCourse extends Model
 
     protected $table = 'students_courses';
 
+    protected $fillable = [
+        'student_id',
+        'instructor_id',
+        'course_id'
+    ];
+
+    protected $attributes = [
+        'is_active_flag' => 1
+    ];
+
     public function student(){
         return $this->belongsTo(Student::class, 'student_id')->withDefault();
     }

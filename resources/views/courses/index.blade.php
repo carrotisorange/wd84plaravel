@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Students
+            Courses
         </h2>
     </x-slot>
 
@@ -23,32 +23,24 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Address</th>
-                               <th scope="col">Is Enrolled?</th>
+                                <th scope="col">Course</th>
+                                <th scope="col">Schedule</th>
+                                <th scope="col">Is Active?</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $index => $item)
+                            @foreach ($courses as $index => $item)
                             <tr>
                                 <th scope="row">{{ $index+1 }}</th>
-                                <td><a class="link-underline-primary link-primary" href="/student/{{ $item->id }}">{{ $item->name }}</a></td>
-                                <td>{{ $item->age }} yrs. old</td>
-                                <td>{{ $item->address }}</td>
-                                <td>
-                                    @if($item->studentCourses->count() > 0)
-                                    <span class="text-success">Enrolled ({{ $item->studentCourses->count() }})</span>
-                                    @else
-                                    <span class="text-dark">Not yet enrolled</span>
-                                    @endif
-
-                                </td>
+                                <td><a class="link-underline-primary link-primary" href="/course/{{ $item->id }}">{{
+                                        $item->course }}</a></td>
+                                <td>{{ $item->schedule }}</td>
+                                <td>{{ $item->is_active_flag }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $students->links() }}
+                    {{ $courses->links() }}
                 </div>
             </div>
         </div>

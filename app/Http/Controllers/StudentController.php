@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use App\Models\{Student, Payment, Loan, StudentCourse};
+use App\Models\{Student, Payment, Loan, StudentCourse, Course, Instructor};
 
 class StudentController extends Controller
 {
@@ -34,7 +34,13 @@ class StudentController extends Controller
         if($currentUserRole == 'admin'){
             $student = Student::find($id);
 
-            return view('students.show',compact('student'));
+            $studentsCourses = $student->studentCourses()->get();
+
+            $loans = $student->loans()->get();
+
+            $payments = $student->payments()->get();
+
+            return view('students.show',compact('student','studentsCourses','loans','payments'));
         }
         else{
             return 'Restricted page';
@@ -62,7 +68,12 @@ class StudentController extends Controller
 
         //check if the current user role is admin, if not, return restricted page.
         if($currentUserRole == 'admin'){
-            return view('students.create');
+
+            $courses = Course::where('is_active_flag', 1)->get();
+
+            $instructors = Instructor::all();
+
+            return view('students.create', compact('courses', 'instructors'));
         }
         else{
             return 'Restricted page';
@@ -71,17 +82,36 @@ class StudentController extends Controller
 
     public function store(Request $request){
         //validate the inputs
-        $validatedData = $request->validate([
-            'name' => 'required|min:2|max:25',
-            'age' => 'required|integer|min:1|max:100',
-            'address' => 'required|min:10|max:50'
-        ]);
+        try{
+            //implementation of the atomic principle
+            DB::beginTransaction();
+                $validatedStudentData = $request->validate([
+                    'name' => 'required|min:2|max:25',
+                    'age' => 'required|integer|min:1|max:100',
+                    'address' => 'required|min:10|max:50'
+                ]);
 
-        //insert the  new student
-        $student = Student::create($validatedData);
+                $validatedCourseAndInstructorData = $request->validate([
+                    'course_id' => ['required', Rule::exists('courses', 'id')],
+                    'instructor_id' => ['required', Rule::exists('instructors', 'id')]
+                ]);
 
-        //redirect to the new page
-        return redirect('/student/'.$student->id)->with('success', 'Success!');
+                //insert the new student
+                $student = Student::create($validatedStudentData);
+                $validatedCourseAndInstructorData['student_id'] = $student->id;
+
+                StudentCourse::create($validatedCourseAndInstructorData);
+
+                DB::commit();
+
+                //redirect to the new page
+                return redirect('/student/'.$student->id)->with('success', 'Success!');
+
+
+        }catch(\Exception $e){
+            DB::rollBack();
+        }
+
     }
 
     public function update(Request $request, $id){
@@ -115,6 +145,5 @@ class StudentController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
         }
-
     }
 }

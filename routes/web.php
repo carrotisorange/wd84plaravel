@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //route for the student
-Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students', [StudentController::class, 'index'])->name('students');
 Route::get('/student/{id}', [StudentController::class, 'show']);
 Route::get('/student/{id}/edit', [StudentController::class, 'edit']);
 Route::get('/student/', [StudentController::class, 'create']);
@@ -45,7 +45,7 @@ Route::put('/student/{id}/', [StudentController::class, 'update']);
 Route::delete('/student/{id}', [StudentController::class, 'destroy']);
 
 //route for the studentcourse
-Route::get('/studentcourse', [StudentCourseController::class, 'index']);
+Route::get('/studentcourses', [StudentCourseController::class, 'index'])->name('studentcourses');
 Route::get('/studentcourse/{id}', [StudentCourseController::class, 'show']);
 Route::get('/studentcourse/{id}/edit', [StudentCourseController::class, 'edit']);
 Route::get('/studentcourse/', [StudentCourseController::class, 'create']);
@@ -55,7 +55,7 @@ Route::delete('/studentcourse/{id}', [StudentCourseController::class, 'destroy']
 
 
 //routes for courses
-Route::get('/courses', [CourseController::class, 'index']);
+Route::get('/courses', [CourseController::class, 'index'])->name('courses');
 Route::get('/course/{id}', [CourseController::class, 'show']);
 Route::get('/course/{id}/edit', [CourseController::class, 'edit']);
 Route::get('/course/', [CourseController::class, 'create']);
@@ -64,7 +64,7 @@ Route::put('/course/{id}/update', [CourseController::class, 'update']);
 Route::delete('/course/{id}', [CourseController::class, 'destroy']);
 
 //routes for loans
-Route::get('/loans', [LoanController::class, 'index']);
+Route::get('/loans', [LoanController::class, 'index'])->name('loans');
 Route::get('/loan/{id}', [LoanController::class, 'show']);
 Route::get('/loan/{id}/edit', [LoanController::class, 'edit']);
 Route::get('/loan/', [LoanController::class, 'create']);
@@ -73,7 +73,7 @@ Route::put('/loan/{id}/update', [LoanController::class, 'update']);
 Route::delete('/loan/{id}', [LoanController::class, 'destroy']);
 
 //routes for instructors
-Route::get('/instructors', [InstructorController::class, 'index']);
+Route::get('/instructors', [InstructorController::class, 'index'])->name('instructors');
 Route::get('/instructor/{id}', [InstructorController::class, 'show']);
 Route::get('/instructor/{id}/edit', [InstructorController::class, 'edit']);
 Route::get('/instructor/', [InstructorController::class, 'create']);
@@ -82,7 +82,7 @@ Route::put('/instructor/{id}/update', [InstructorController::class, 'update']);
 Route::delete('/instructor/{id}', [InstructorController::class, 'destroy']);
 
 //routes for payments
-Route::get('/payments', [PaymentController::class, 'index']);
+Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
 Route::get('/payment/{id}', [PaymentController::class, 'show']);
 Route::get('/payment/{id}/edit', [PaymentController::class, 'edit']);
 Route::get('/payment/', [PaymentController::class, 'create']);

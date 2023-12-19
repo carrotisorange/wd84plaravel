@@ -11,9 +11,35 @@
                 </div>
 
                 <!-- Navigation Links -->
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('students')" :active="request()->routeIs('students')">
+                        {{ __('Students') }}
+                    </x-nav-link>
+                </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('studentcourses')" :active="request()->routeIs('studentcourses')">
+                        {{ __('Enrollees') }}
+                    </x-nav-link>
+                </div> --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('courses')" :active="request()->routeIs('courses')">
+                        {{ __('Courses') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('instructors')" :active="request()->routeIs('instructors')">
+                        {{ __('Instructors') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('loans')" :active="request()->routeIs('loans')">
+                        {{ __('Loans') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('payments')" :active="request()->routeIs('payments')">
+                        {{ __('Payments') }}
                     </x-nav-link>
                 </div>
             </div>

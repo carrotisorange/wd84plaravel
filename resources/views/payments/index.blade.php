@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Students
+            Payments
         </h2>
     </x-slot>
 
@@ -23,32 +23,36 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Address</th>
-                               <th scope="col">Is Enrolled?</th>
+                                <th scope="col">Student</th>
+                                <th scope="col">Loan ID</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Mode of Payment</th>
+                                <th scope="col">Is Approved?</th>
+                                <th scope="col">Proof of payment</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $index => $item)
+                            @foreach ($payments as $index => $item)
                             <tr>
                                 <th scope="row">{{ $index+1 }}</th>
-                                <td><a class="link-underline-primary link-primary" href="/student/{{ $item->id }}">{{ $item->name }}</a></td>
-                                <td>{{ $item->age }} yrs. old</td>
-                                <td>{{ $item->address }}</td>
+                                <td><a class="link-underline-primary link-primary" href="/loan/{{ $item->id }}">{{
+                                        $item->student->name }}</a></td>
+                                <td>{{ $item->loan->id }}</td>
+                                <td>{{ number_format($item->amount, 2) }}</td>
+                                <td>{{ $item->mode }}</td>
+                                <td>{{ $item->is_approved_flag }}</td>
                                 <td>
-                                    @if($item->studentCourses->count() > 0)
-                                    <span class="text-success">Enrolled ({{ $item->studentCourses->count() }})</span>
+                                    @if($item->proof_of_payment)
+                                    <a target="_blank" class="link-underline-primary link-primary" href="{{ asset($item->proof_of_payment) }}">Attachment</a>
                                     @else
-                                    <span class="text-dark">Not yet enrolled</span>
+                                    No attachment
                                     @endif
-
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $students->links() }}
+                    {{ $payments->links() }}
                 </div>
             </div>
         </div>

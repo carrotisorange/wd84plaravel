@@ -11,6 +11,8 @@
                 <div class="p-6 text-gray-900">
                     <form action="/student" method="POST">
                         @csrf
+                        <h1><b>Student Info</b> </h1>
+                        <br>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" name="name" class="form-control" id="name" aria-describedby="name" value="{{ old('name') }}">
@@ -43,6 +45,42 @@
                             @enderror
 
                         </div>
+                        <h1><b>Course Info</b> </h1>
+                        <br>
+                        <div class="mb-3">
+                            <label for="course_id" class="form-label">Select a course</label>
+                            <select name="course_id" class="form-control" id="course_id" aria-describedby="course_id" value="{{ old('course_id') }}">
+                                <option value="">Select one</option>
+                                @foreach ($courses as $item)
+                                <option value="{{ $item->id }}">{{ $item->course }}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                            @error('course_id')
+                            <p class="alert alert-danger">
+                                {{$message}}
+                            </p>
+                            @enderror
+                        </div>
+                        <br>
+                        <h1><b>Instructor Info</b> </h1>
+                        <br>
+                        <div class="mb-3">
+                            <label for="instructor_id" class="form-label">Select an instructor</label>
+                            <select name="instructor_id" class="form-control" id="instructor_id" aria-describedby="instructor_id" value="{{ old('instructor_id') }}">
+                                <option value="">Select one</option>
+                                @foreach ($instructors as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            <br>
+                            @error('instructor_id')
+                            <p class="alert alert-danger">
+                                {{$message}}
+                            </p>
+                            @enderror
+                        </div>
+                        <br>
                         <a href="/students" class="text-black btn btn-danger">Back</a>
                         <button type="submit" class="text-black btn btn-primary">Submit</button>
                     </form>

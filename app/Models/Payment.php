@@ -12,10 +12,10 @@ class Payment extends Model
     protected $table = 'payments';
 
     public function student(){
-        return $this->belongsTo(Student::class, 'student_id');
+        return $this->belongsTo(Student::class, 'student_id')->withDefault();
     }
 
     public function loan(){
-        return $this->belongsTo(Loan::class, 'loan_id');
+        return $this->belongsTo(Loan::class, 'loan_id')->withDefault();
     }
 }

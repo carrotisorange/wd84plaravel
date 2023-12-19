@@ -8,9 +8,19 @@ use App\Models\Course;
 class CourseController extends Controller
 {
     public function index(){
-        $courses = Course::all();
+        //get the current user role
+        $currentUserRole = auth()->user()->role->role;
 
-        return $courses;
+        //check if the current user role is admin, if not, return restricted page.
+        if($currentUserRole == 'admin'){
+        $courses = Course::paginate(10);
+        // DB::table('students')->paginate(10);
+
+        return view('courses.index',compact('courses'));
+        }
+        else{
+        return 'Restricted page';
+        }
     }
 
     public function show($id){
@@ -46,7 +56,7 @@ class CourseController extends Controller
     }
 
     public function update(Request $request, $id){
-        
+
         //validate the inputs
         $validated = $request->validate([
             'course' => 'required|string|min:2|max:25',

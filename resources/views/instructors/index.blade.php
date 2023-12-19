@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Students
+            Instructors
         </h2>
     </x-slot>
 
@@ -24,31 +24,23 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Address</th>
-                               <th scope="col">Is Enrolled?</th>
+                                <th scope="col">Date hired</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($students as $index => $item)
+                            @foreach ($instructors as $index => $item)
                             <tr>
                                 <th scope="row">{{ $index+1 }}</th>
-                                <td><a class="link-underline-primary link-primary" href="/student/{{ $item->id }}">{{ $item->name }}</a></td>
-                                <td>{{ $item->age }} yrs. old</td>
-                                <td>{{ $item->address }}</td>
-                                <td>
-                                    @if($item->studentCourses->count() > 0)
-                                    <span class="text-success">Enrolled ({{ $item->studentCourses->count() }})</span>
-                                    @else
-                                    <span class="text-dark">Not yet enrolled</span>
-                                    @endif
+                                <td><a class="link-underline-primary link-primary" href="/instructor/{{ $item->id }}">{{
+                                        $item->name }}</a></td>
+                                <td>{{ Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</td>
 
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $students->links() }}
+                    {{ $instructors->links() }}
                 </div>
             </div>
         </div>
